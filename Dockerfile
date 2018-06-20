@@ -1,21 +1,29 @@
 # Determine parent-image
 FROM python:3.6-slim
 
-# Run in directory of new things to be developed (or modify ADD)
-WORKDIR /masketta_dev_
+
+
+# Ensure correct "docker run" usage in order to properly use volume
+# ensure syntax is correct and if an alias is being run it is properly updated
+
+VOLUME ["/dev_masketta_clan"]
+
+#WORKDIR /dev_masketta_clan
+
+# Run in directory of new things to be developed
+WORKDIR /dev_masketta_
 
 #select any files to add
 #ADD . /masketta_dev_/
 
 
 # Modify bashrc as desired
-ADD ./bash_config/.dev_bashrc /root/.bashrc 
-ADD ./bash_config/.dev_bash_aliases /root/.bash_aliases 
-ADD ./bash_config/.dev_vimrc /root/.vimrc
+ADD ./dev_bash_config/* /root/
 # .bashrc configuration updates upon container creation(circa)
 
-# Ensure correct "docker run" usage in order to properly use volume
-# VOLUME ["/Dev_Vol"]
+
+
+
 
 # Personal instructions for dev env package installation
 RUN apt-get update
